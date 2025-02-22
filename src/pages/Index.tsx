@@ -1,14 +1,160 @@
-// Update this page (the content is just a fallback if you fail to update the page)
 
-const Index = () => {
+import { useState } from "react";
+import { faker } from "@faker-js/faker";
+import { Home, QrCode, Settings } from "lucide-react";
+import { motion } from "framer-motion";
+
+const PaymentCard = () => {
+  const [isFrozen, setIsFrozen] = useState(false);
+  const [activeMode, setActiveMode] = useState<"pay" | "card">("card");
+  
+  const cardData = {
+    number: faker.finance.creditCardNumber("#### #### #### ####"),
+    expiry: faker.date.future().toLocaleDateString("en-US", { month: "2-digit", year: "2-digit" }),
+    cvv: faker.finance.creditCardCVV(),
+    holderName: faker.person.fullName()
+  };
+
+  const handleFreeze = () => {
+    setIsFrozen(!isFrozen);
+  };
+
+  const handleCopyDetails = async () => {
+    try {
+      await navigator.clipboard.writeText(cardData.number);
+      console.log("Card details copied!");
+    } catch (err) {
+      console.error("Failed to copy card details");
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
+    <div className="min-h-screen bg-[#121212] text-white p-6">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-2xl font-semibold mb-2">select payment mode</h1>
+        <p className="text-gray-400 text-sm">
+          choose your preferred payment method to make payment.
+        </p>
+      </div>
+
+      {/* Mode Toggle */}
+      <div className="flex gap-4 mb-8">
+        <button
+          className={`px-4 py-2 rounded-full ${
+            activeMode === "pay"
+              ? "bg-white/10 text-white"
+              : "text-gray-500"
+          }`}
+          onClick={() => setActiveMode("pay")}
+        >
+          pay
+        </button>
+        <button
+          className={`px-4 py-2 rounded-full ${
+            activeMode === "card"
+              ? "bg-white/10 text-white"
+              : "text-gray-500"
+          }`}
+          onClick={() => setActiveMode("card")}
+        >
+          card
+        </button>
+      </div>
+
+      {/* Card Label */}
+      <div className="mb-4 text-sm text-gray-400 uppercase tracking-wide">
+        Your digital debit card
+      </div>
+
+      {/* Card Container */}
+      <motion.div
+        className="relative aspect-[1.586/1] w-full max-w-md mx-auto mb-8"
+        animate={{
+          filter: isFrozen ? "blur(8px) brightness(0.8)" : "blur(0px) brightness(1)",
+        }}
+        transition={{ duration: 0.5 }}
+      >
+        {/* Card */}
+        <div className={`w-full h-full rounded-2xl overflow-hidden relative ${isFrozen ? 'pointer-events-none' : ''}`}>
+          {!isFrozen ? (
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 p-6">
+              <div className="h-full flex flex-col justify-between">
+                {/* Card Details */}
+                <div className="space-y-4">
+                  <div className="text-2xl font-mono tracking-wider">
+                    {cardData.number}
+                  </div>
+                  <div className="flex justify-between items-center text-sm">
+                    <span>
+                      <div className="text-gray-400">expiry</div>
+                      {cardData.expiry}
+                    </span>
+                    <span>
+                      <div className="text-gray-400">cvv</div>
+                      {cardData.cvv}
+                    </span>
+                  </div>
+                </div>
+                {/* Card Footer */}
+                <div className="flex justify-between items-end">
+                  <button 
+                    onClick={handleCopyDetails}
+                    className="text-red-500 text-sm hover:text-red-400 transition-colors"
+                  >
+                    copy details
+                  </button>
+                  <img src="/lovable-uploads/c7c9094a-a65f-4449-ae34-183256791d0e.png" alt="Card Logo" className="h-8" />
+                </div>
+              </div>
+            </div>
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800">
+              <img 
+                src="/lovable-uploads/160ade71-f238-4e1b-86c6-6775f43969ad.png" 
+                alt="Frozen Card" 
+                className="w-full h-full object-cover opacity-50"
+              />
+            </div>
+          )}
+        </div>
+      </motion.div>
+
+      {/* Freeze Button */}
+      <motion.button
+        onClick={handleFreeze}
+        className="absolute right-6 top-1/2 transform -translate-y-1/2"
+        whileTap={{ scale: 0.95 }}
+      >
+        <div className={`p-2 rounded-full ${isFrozen ? 'text-red-500' : 'text-gray-400'}`}>
+          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v12M6 12h12" />
+          </svg>
+        </div>
+        <span className="text-xs mt-1 block text-center">
+          {isFrozen ? 'unfreeze' : 'freeze'}
+        </span>
+      </motion.button>
+
+      {/* Bottom Navigation */}
+      <div className="fixed bottom-0 left-0 right-0 bg-black/80 backdrop-blur-lg">
+        <div className="max-w-md mx-auto px-8 py-4 flex justify-between items-center">
+          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition-colors">
+            <Home size={24} />
+            <span className="text-xs">home</span>
+          </button>
+          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition-colors">
+            <QrCode size={24} />
+            <span className="text-xs">yolo pay</span>
+          </button>
+          <button className="flex flex-col items-center gap-1 text-gray-400 hover:text-white transition-colors">
+            <Settings size={24} />
+            <span className="text-xs">girlie</span>
+          </button>
+        </div>
       </div>
     </div>
   );
 };
 
-export default Index;
+export default PaymentCard;
