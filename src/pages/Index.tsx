@@ -69,61 +69,65 @@ const PaymentCard = () => {
 
       {/* Card Container */}
       <div className="relative">
+        {/* Card */}
         <motion.div
           className="relative aspect-[1.586/1] w-full max-w-md mx-auto mb-8"
-          animate={{
-            filter: isFrozen ? "blur(8px) brightness(0.8)" : "blur(0px) brightness(1)",
-          }}
-          transition={{ duration: 0.5 }}
         >
-          {/* Card */}
-          <div className={`w-full h-full rounded-2xl overflow-hidden relative ${isFrozen ? 'pointer-events-none' : ''}`}>
-            {!isFrozen ? (
-              <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 p-6">
-                <div className="h-full flex flex-col justify-between">
-                  {/* Card Details */}
-                  <div className="space-y-4">
-                    <div className="text-lg sm:text-2xl font-mono tracking-wider">
-                      {cardData.number}
+          <div className={`w-full h-full rounded-2xl overflow-hidden relative`}>
+            <motion.div
+              className="absolute inset-0"
+              animate={{
+                filter: isFrozen ? "blur(8px) brightness(0.8)" : "blur(0px) brightness(1)",
+              }}
+              transition={{ duration: 0.5 }}
+            >
+              {!isFrozen ? (
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800 p-6">
+                  <div className="h-full flex flex-col justify-between">
+                    {/* Card Details */}
+                    <div className="space-y-4">
+                      <div className="text-lg sm:text-2xl font-mono tracking-wider">
+                        {cardData.number}
+                      </div>
+                      <div className="flex justify-between items-center text-sm">
+                        <span>
+                          <div className="text-gray-400">expiry</div>
+                          {cardData.expiry}
+                        </span>
+                        <span>
+                          <div className="text-gray-400">cvv</div>
+                          {cardData.cvv}
+                        </span>
+                      </div>
                     </div>
-                    <div className="flex justify-between items-center text-sm">
-                      <span>
-                        <div className="text-gray-400">expiry</div>
-                        {cardData.expiry}
-                      </span>
-                      <span>
-                        <div className="text-gray-400">cvv</div>
-                        {cardData.cvv}
-                      </span>
+                    {/* Card Footer */}
+                    <div className="flex justify-between items-end">
+                      <button 
+                        onClick={handleCopyDetails}
+                        className="text-red-500 text-sm hover:text-red-400 transition-colors"
+                      >
+                        copy details
+                      </button>
+                      <img src="/lovable-uploads/c7c9094a-a65f-4449-ae34-183256791d0e.png" alt="Card Logo" className="h-6 sm:h-8" />
                     </div>
-                  </div>
-                  {/* Card Footer */}
-                  <div className="flex justify-between items-end">
-                    <button 
-                      onClick={handleCopyDetails}
-                      className="text-red-500 text-sm hover:text-red-400 transition-colors"
-                    >
-                      copy details
-                    </button>
-                    <img src="/lovable-uploads/c7c9094a-a65f-4449-ae34-183256791d0e.png" alt="Card Logo" className="h-6 sm:h-8" />
                   </div>
                 </div>
-              </div>
-            ) : (
-              <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800">
-                <img 
-                  src="/lovable-uploads/160ade71-f238-4e1b-86c6-6775f43969ad.png" 
-                  alt="Frozen Card" 
-                  className="w-full h-full object-cover opacity-50"
-                />
-              </div>
-            )}
+              ) : (
+                <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800">
+                  <img 
+                    src="/lovable-uploads/160ade71-f238-4e1b-86c6-6775f43969ad.png" 
+                    alt="Frozen Card" 
+                    className="w-full h-full object-cover opacity-50"
+                  />
+                </div>
+              )}
+            </motion.div>
           </div>
 
           {/* Freeze Button */}
           <motion.button
             onClick={handleFreeze}
-            className="absolute -right-4 sm:right-4 top-1/2 transform -translate-y-1/2"
+            className="absolute -right-4 sm:right-4 top-1/2 transform -translate-y-1/2 z-10"
             whileTap={{ scale: 0.95 }}
           >
             <div className={`p-3 rounded-full bg-black/80 backdrop-blur-lg shadow-lg ${isFrozen ? 'text-red-500' : 'text-gray-400'} hover:scale-110 transition-transform`}>
