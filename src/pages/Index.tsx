@@ -124,10 +124,10 @@ const PaymentCard = () => {
             </motion.div>
           </div>
 
-          {/* Freeze Button */}
+          {/* Freeze Button - Repositioned to top-right */}
           <motion.button
             onClick={handleFreeze}
-            className="absolute -right-4 sm:right-4 top-1/2 transform -translate-y-1/2 z-10"
+            className="absolute -right-4 -top-4 z-10"
             whileTap={{ scale: 0.95 }}
           >
             <div className={`p-3 rounded-full bg-black/80 backdrop-blur-lg shadow-lg ${isFrozen ? 'text-red-500' : 'text-gray-400'} hover:scale-110 transition-transform`}>
