@@ -1,22 +1,14 @@
-# Welcome to your Lovable project
+# Welcome to YOLO Task
 
 ## Project info
-
-**URL**: https://lovable.dev/projects/9b406110-ddb4-479f-a686-9c4a0ffaf504
 
 ## How can I edit this code?
 
 There are several ways of editing your application.
 
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/9b406110-ddb4-479f-a686-9c4a0ffaf504) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
 **Use your preferred IDE**
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+If you want to work locally using your own IDE, you can clone this repo and push changes.
 
 The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
@@ -52,7 +44,7 @@ npm run dev
 
 ## What technologies are used for this project?
 
-This project is built with .
+This project is built with:
 
 - Vite
 - TypeScript
@@ -60,10 +52,23 @@ This project is built with .
 - shadcn-ui
 - Tailwind CSS
 
-## How can I deploy this project?
 
-Simply open [Lovable](https://lovable.dev/projects/9b406110-ddb4-479f-a686-9c4a0ffaf504) and click on Share -> Publish.
+## Enhancements for Mobile Responsiveness and Freeze Animation
 
-## I want to use a custom domain - is that possible?
+### **Features Implemented:**
+- Updated the code to ensure full mobile responsiveness.
+- Added a **Freeze Animation** that activates when clicking the Freeze button.
+- The **Freeze Button** has been designed to work seamlessly on both mobile and web.
+- The **Freeze Button** includes a **Snowflake icon** for better visual representation.
+- The button is now **round-shaped** for a modern and clean look.
+- The animation applies **only to the card content**, not the freeze button itself.
+- **Fixed positioning** of the Freeze button at the **top-right corner** of the card to keep it accessible.
+- Ensured the Freeze button remains **interactive and visible after freezing the card**.
 
-We don't support custom domains (yet). If you want to deploy your project under your own domain then we recommend using Netlify. Visit our docs for more details: [Custom domains](https://docs.lovable.dev/tips-tricks/custom-domain/)
+### **Interaction Details:**
+- The Freeze button remains **functional at all times**, ensuring users can toggle the freeze effect.
+- The card content freezes with a blur effect, while the Freeze button remains clear.
+- Hover and touch effects are optimized for better user experience across all screen sizes.
+
+These changes ensure a seamless and engaging UI while maintaining a professional look. 🚀
+

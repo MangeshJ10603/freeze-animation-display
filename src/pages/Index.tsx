@@ -108,14 +108,14 @@ const PaymentCard = () => {
                       >
                         copy details
                       </button>
-                      <img src="/lovable-uploads/c7c9094a-a65f-4449-ae34-183256791d0e.png" alt="Card Logo" className="h-6 sm:h-8" />
+                      <img src="/uploads/c7c9094a-a65f-4449-ae34-183256791d0e.png" alt="Card Logo" className="h-6 sm:h-8" />
                     </div>
                   </div>
                 </div>
               ) : (
                 <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-gray-800">
                   <img 
-                    src="/lovable-uploads/160ade71-f238-4e1b-86c6-6775f43969ad.png" 
+                    src="/uploads/160ade71-f238-4e1b-86c6-6775f43969ad.png" 
                     alt="Frozen Card" 
                     className="w-full h-full object-cover opacity-50"
                   />
